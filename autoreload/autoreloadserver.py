@@ -42,6 +42,7 @@ class FileModificationDetector(WebSocket):
         clients.add(self)
 
     def handleClose(self):
+        print self.address, 'disconnected'
         if self in clients:
             clients.remove(self)
 
