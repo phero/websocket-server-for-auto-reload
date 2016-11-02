@@ -20,8 +20,6 @@ class RefreshEventHandler(FileSystemEventHandler):
         self.message = message
 
     def on_any_event(self, event):
-        if not clients:
-            return
         target_extensions = [
             '.css',
             '.jpg',
