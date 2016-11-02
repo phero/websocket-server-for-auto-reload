@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>AutoReload sample</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+  (function() {
+    var url = 'ws://127.0.0.1:16000';
+    var web_socket = null;
+
+    function connect() {
+      if (web_socket == null) {
+        web_socket = new WebSocket(url);
+        web_socket.onopen = onOpen;
+        web_socket.onmessage = onMessage;
+        web_socket.onclose = onClose;
+        web_socket.onerror = onError;
+      }
+    }
+
+    function onOpen(event) {
+      message('Connected.');
+    }
+
+    function onMessage(event) {
+      message(JSON.stringify(event.data));
+    }
+
+    function onError(event) {
+      message('Error.');
+    }
+
+    function onClose(event) {
+      message('Disconnected. Reconnect in 3 seconds.');
+      web_socket = null;
+      setTimeout(connect, 3000);
+    }
+
+    function message(msg) {
+      $('#messages').prepend($('<li></li>').text(msg));
+    }
+
+    $(document).ready(connect);
+  })();
+</script>
+<ul id="messages"></ul>
