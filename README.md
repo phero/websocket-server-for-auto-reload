@@ -17,4 +17,4 @@ cd autoreload/
 ## Check
 
 1. Open check.html via browser.
-1. Touch some file in <SOME FOLDER> above.
+1. Touch some file in *SOME FOLDER* above.
